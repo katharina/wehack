@@ -24,6 +24,19 @@
         }
         getSoundcloud();
 
+      function getYoutube(){  
+          $.ajax({
+            dataType: "jsonp",
+            url:"http://gdata.youtube.com/feeds/api/videos?category=bass%2C%2Dfish%2Dfishing&v=2&alt=json",
+            
+            success: function(data) {
+              return false;
+            }
+          });
+      }
+        
+        getYoutube();
+
       lastTweet=0;    
       function getTweets(){ 
 
@@ -48,7 +61,7 @@
         function getInstagram(){ 
           $.getJSON("https://api.instagram.com/v1/tags/wehack/media/recent?client_id=a527dbb0878e46f486f7deac006da93d&callback=?", function(data) {
 
-              console.log(data);
+//              console.log(data);
                 for( key in data['data'] ) {    
                   var image_url = data['data'][key]['images']['low_resolution']['url'];
                   var link = data['data'][key]['link'];
@@ -77,7 +90,7 @@
           return b.date - a.date 
         })
         for(var i = 0; i < foo.length; i++) { 
-        console.log(foo[i].date)   
+//        console.log(foo[i].date)   
         $('#newest ul').append(foo[i].value);
         }
         $('body').removeClass('loading');
