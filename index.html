@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>WE Hack!</title>
+		<link href="stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /> 
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+
+    <script>
+      var array = [];
+      var numberOfServices = 3;
+      var numOfFetchedServices = 0;
+      
+      function getSoundcloud(){ 
+          $.getJSON("https://api.soundcloud.com/tracks.json?q=wehack&client_id=pmJ1d1SIhmaOVBgN5niPw", function(data) {
+              for(var i = 0; i < data.length; i++) {    
+                var track = data[i]
+                array.push({"date" : new Date(track.created_at), "value" : '<li class="soundcloud"><iframe width="400px" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'+ track.id +'">hey</iframe></li>'
+                });
+              }
+              numOfFetchedServices++;          
+            }
+          )
+        }
+        getSoundcloud();
+
+      lastTweet=0;    
+      function getTweets(){ 
+
+          $.getJSON("http://search.twitter.com/search.json?q=wehack&callback=?", function(data) {
+              
+//              console.log(data);
+              lastTweet=data['results'][0]['id'];
+              for( key in data['results'] ) {    
+                  var tweet = data['results'][key]['text'] ;
+                  var created_at = data['results'][key]['created_at'] ;
+                  var from = data['results'][key]['from_user'];
+                  var from_image = data['results'][key]['profile_image_url'];
+
+                  array.push({"date" : new Date(created_at), "value" : '<li class="twitter"><img src="'+from_image+'"><h3>'+tweet+'</h3><br/>'+from+'<br/></li>'});
+              }
+              numOfFetchedServices++;                    
+            }
+          )
+        }
+        getTweets();
+
+        function getInstagram(){ 
+          $.getJSON("https://api.instagram.com/v1/tags/wehack/media/recent?client_id=a527dbb0878e46f486f7deac006da93d&callback=?", function(data) {
+
+              console.log(data);
+                for( key in data['data'] ) {    
+                  var image_url = data['data'][key]['images']['low_resolution']['url'];
+                  var link = data['data'][key]['link'];
+                  var created_time = data['data'][key]['created_time'];
+//                  var from = data['results'][key]['from_user'];
+//                  var from_image = data['results'][key]['profile_image_url'];
+
+                  array.push({"date" : new Date(created_time * 1000), "value" : '<li class="instagram"><a href="'+link+'"><img src="'+image_url+'"></a><br/></li>'});            
+
+              }
+              numOfFetchedServices++;          
+                        
+           }
+          )
+        }
+      getInstagram();
+
+      var interval;
+      
+      function initialRender () {
+        if(numOfFetchedServices < numberOfServices) {
+          return;
+        }
+        
+        foo = array.sort(function(a,b){
+          return b.date - a.date 
+        })
+        for(var i = 0; i < foo.length; i++) { 
+        console.log(foo[i].date)   
+        $('#newest ul').append(foo[i].value);
+        }
+        $('body').removeClass('loading');
+        window.setInterval(getNewestTweet, 2000);
+        clearInterval(interval);
+      };
+      
+      interval = window.setInterval(initialRender, 1000)
+      
+    </script>
+
+
+    <script>
+
+      var passData = function(data) {
+        var foo = data.results[0].id.toString();
+        // foo = foo + 1;
+//        console.log('a', data.results[0].id, typeof foo);
+      };
+      
+      function getNewestTweet(){ 
+
+          $.getJSON("http://search.twitter.com/search.json?q=wehack&since_id=" + (lastTweet) + "&callback=?", function(data) {
+
+              for( key in data['results'] ) {    
+                  var tweet = data['results'][key]['text'] ;
+                  var from = data['results'][key]['from_user'];
+                  var id = data['results'][key]['id'];
+                  var created_at = data['results'][key]['created_at'];
+                  var from_image = data['results'][key]['profile_image_url'];
+
+                  if(id == lastTweet)
+                    continue;
+                  console.log("I wrote a tweet");
+                  $('#newest ul').prepend('<li class="twitter"><img src="'+from_image+'"><h3>'+tweet+'</h3><br/>'+from+'<br/></li>');
+              } 
+              if(data['results'].length > 0)         
+                lastTweet = data['results'][0]['id'];
+          }
+          )
+        }
+
+    </script>
+
+	</head>
+
+	<body class="loading">
+	  <div class="header">
+	    <img src="img/test.png" style="margin: 0 auto;">
+	  </div>
+	  <div id="newest">
+	    <ul>
+	    </ul>
+	  </div>
+	  
+    
+    
+	</body>
+
+</html>

@@ -1,0 +1,73 @@
+body.loading {
+	background-image: url('../img/load.gif');
+	background-size: auto;
+  background-repeat: no-repeat;
+	background-position: 50%;
+}
+
+body.loading .header {
+	display: none;
+}
+
+
+body {
+	background-image: url('../img/bg.jpg');
+	background-size: cover;
+	background-position: fixed;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+	font-family: 'lucida grande', sans-serif;
+	line-height: 1.4em;
+}
+
+.header {
+	width: 300px;
+	margin: 50px auto 50px;
+}
+
+.header img {
+	width: 300px;
+	margin: 0 auto;
+}
+
+ul {
+	list-style: none;
+}
+
+#twitter, #instagram {
+	margin-top: 50px;
+	padding-top: 20px;
+	border-top: 2px dashed #4276ba;
+}
+
+ul li.twitter {
+	list-style: none;
+	margin-bottom: 20px;
+	color: #fff;
+}
+
+ul li.instagram, ul li.instagram {
+	float: left;
+	margin: 0 10px 5px 0;
+}
+
+ul li.instagram img {
+}
+
+
+ul li.twitter img {
+	width: 56px;
+	height: 56px;
+	position: relative;
+	top: 10px;
+}
+
+ul li.twitter h3 {
+	background: #fff;
+	display: inline;
+	font-size: 48px;
+	color: #000;
+	padding-left: 10px;
+	font-weight: normal;
+	line-height: 1.4em;
+}
