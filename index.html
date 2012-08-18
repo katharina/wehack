@@ -16,7 +16,7 @@
               for(var i = 0; i < data.length; i++) {  
                 console.log(data);
                 var track = data[i]
-                array.push({"date" : new Date(track.created_at), "value" : '<li class="soundcloud"><img src="'+track.waveform_url+'" width="200" height="200"></li>'
+                array.push({"date" : new Date(track.created_at), "value" : '<li class="soundcloud"><img src="'+track.artwork_url+'"></li>'
                 });
               }
               numOfFetchedServices++;          
