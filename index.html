@@ -16,7 +16,7 @@
               for(var i = 0; i < data.length; i++) {  
                 console.log(data);
                 var track = data[i]
-                array.push({"date" : new Date(track.created_at), "value" : '<li class="soundcloud"><img src="'+track.waveform_url+'" width="300" height="300"></li>'
+                array.push({"date" : new Date(track.created_at), "value" : '<li class="soundcloud"><img src="'+track.waveform_url+'" width="200" height="200"></li>'
                 });
               }
               numOfFetchedServices++;          
@@ -84,16 +84,22 @@
         function getInstagram(){ 
           $.getJSON("https://api.instagram.com/v1/tags/wehack/media/recent?client_id=a527dbb0878e46f486f7deac006da93d&callback=?", function(data) {
 
-              console.log(data);
+              console.log(data['data'][0]['user']);
                 for( key in data['data'] ) {    
                   var image_url = data['data'][key]['images']['low_resolution']['url'];
                   var link = data['data'][key]['link'];
                   var created_time = data['data'][key]['created_time'];
+                  var user = data['data'][key]['user']['full_name'];
+                  var from_image = data['data'][key]['user']['profile_picture'];
+//                  if(data['data'][key]['caption']['text']) {
+//                    var caption = data['data'][key]['caption']['text'];
+//                  }
+                    
                   
 //                  var from = data['results'][key]['from_user'];
 //                  var from_image = data['results'][key]['profile_image_url'];
 
-                  array.push({"date" : new Date(created_time * 1000), "value" : '<li class="instagram"><a href="'+link+'"><img src="'+image_url+'"></a><br/></li>'});            
+                  array.push({"date" : new Date(created_time * 1000), "value" : '<li class="instagram"><div class="from"><img src="'+from_image+'">'+user+'</div><a href="'+link+'"><img src="'+image_url+'" class="ig"></a></li>'});            
   
               }
               numOfFetchedServices++;          
@@ -117,7 +123,7 @@
 //        console.log(foo[i].date)   
           $('#newest ul').append(foo[i].value);
         }
-        $('#newest ul li').wookmark({offset: 0});
+        $('#newest ul li').wookmark({offset: 15});
         $('body').removeClass('loading');
         window.setInterval(getNewestTweet, 2000);
         clearInterval(interval);
@@ -150,23 +156,23 @@
                   if(id == lastTweet)
                     continue;
                   console.log("I wrote a tweet");
-                  $('#newest ul').prepend('<li class="twitter new"><img src="'+from_image+'"><h3>'+tweet+'</h3><br/>'+from+'<br/></li>');
+                  $('#newest ul').prepend('<li class="twitter new"><div class="from"><img src="'+from_image+'">'+from+'</div><h3>'+tweet+'</h3></li>');
               } 
               if(data['results'].length > 0)         
                 lastTweet = data['results'][0]['id'];
-                $('#newest ul li').wookmark({offset: 0});
+                $('#newest ul li').wookmark({offset: 15});
           }
           )
         }
 
     </script>
-
+    
 
 	</head>
 
 	<body class="loading">
 	  <div class="header">
-	    <img src="img/test.png" style="margin: 0 auto;">
+	    <img src="img/test.png" class="logo">
 	  </div>
 	  <div class="content">
   	  <div id="newest">

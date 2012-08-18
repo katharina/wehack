@@ -8,6 +8,15 @@ body.loading {
 	background-size: auto;
   background-repeat: no-repeat;
 	background-position: 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body {
+	background-image: url('http://distilleryimage10.instagram.com/e621fabce93211e1a58122000a1de2c6_7.jpg');
+	background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 body.loading .header {
@@ -22,22 +31,15 @@ body {
 }
 
 .header {
-	height: 100px;
-	padding: 50px;
-	background-image: url('../img/bg.jpg');
-	background-size: cover;
-	background-position: fixed 50%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+	width: 100%;
 }
 
-.header img {
-	width: 300px;
-	margin: 0 auto;
+.header img.logo {
+	margin: 10px 0 0 -350px;
+	position: relative;
+	left: 50%;
 }
 
-.content {
-}
 
 #newest {
 	position: relative;
@@ -53,12 +55,12 @@ ul {
 
 
 ul li {
-	width: 300px;
+	width: 200px;
 	background: #fff;
 	margin: 0px !important;
 	padding: 20px 20px;
-	border-left: 1px solid #eee;
-	border-top: 1px solid #efefef;
+	margin: 10px;
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
 }
 
 ul li.twitter {
@@ -67,7 +69,7 @@ ul li.twitter {
 }
 
 ul li.new {
-	background: #9cbbe4;
+	background: rgba(255,255,0,1);
 }
 
 ul li.instagram, ul li.instagram {
@@ -75,16 +77,23 @@ ul li.instagram, ul li.instagram {
 	margin: 0 10px 5px 0;
 }
 
-ul li.instagram img {
-	width: 300px;
-	height: 300px;
+
+ul li .from img {
+	width: 25px;
+	height: 25px;
+}
+
+ul li.instagram img.ig {
+	width: 200px;
+	height: 200px;
 }
 
 ul li .from {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 	position: relative;
-	padding-left: 60px;
-	padding-top: 10px;
+	padding-left: 35px;
+	padding-top: 3px;
+	font-size: 12px;
 }
 
 ul li .from img {
@@ -94,11 +103,11 @@ ul li .from img {
 }
 
 ul li.twitter h3 {
-	background: #fff;
-	display: inline;
 	font-size: 20px;
 	color: #000;
 	font-weight: normal;
 	line-height: 1.4em;
 	font-family: georgia;
+	margin: 0;
+	padding: 0;
 }
