@@ -1,3 +1,8 @@
+body, html {
+	margin: 0;
+	padding: 0;
+}
+
 body.loading {
 	background-image: url('../img/load.gif');
 	background-size: auto;
@@ -11,18 +16,19 @@ body.loading .header {
 
 
 body {
-	background-image: url('../img/bg.jpg');
-	background-size: cover;
-	background-position: fixed;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 	font-family: 'lucida grande', sans-serif;
 	line-height: 1.4em;
+	
 }
 
 .header {
-	width: 300px;
-	margin: 50px auto 50px;
+	height: 100px;
+	padding: 50px;
+	background-image: url('../img/bg.jpg');
+	background-size: cover;
+	background-position: fixed 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .header img {
@@ -30,20 +36,38 @@ body {
 	margin: 0 auto;
 }
 
-ul {
-	list-style: none;
+.content {
 }
 
-#twitter, #instagram {
-	margin-top: 50px;
-	padding-top: 20px;
-	border-top: 2px dashed #4276ba;
+#newest {
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+ul li {
+	width: 300px;
+	background: #fff;
+	margin: 0px !important;
+	padding: 20px 20px;
+	border-left: 1px solid #eee;
+	border-top: 1px solid #efefef;
 }
 
 ul li.twitter {
 	list-style: none;
 	margin-bottom: 20px;
-	color: #fff;
+}
+
+ul li.new {
+	background: #9cbbe4;
 }
 
 ul li.instagram, ul li.instagram {
@@ -52,22 +76,29 @@ ul li.instagram, ul li.instagram {
 }
 
 ul li.instagram img {
+	width: 300px;
+	height: 300px;
 }
 
-
-ul li.twitter img {
-	width: 56px;
-	height: 56px;
+ul li .from {
+	margin-bottom: 30px;
 	position: relative;
-	top: 10px;
+	padding-left: 60px;
+	padding-top: 10px;
+}
+
+ul li .from img {
+	position: absolute;
+	left: 0px;
+	top: 0px;
 }
 
 ul li.twitter h3 {
 	background: #fff;
 	display: inline;
-	font-size: 48px;
+	font-size: 20px;
 	color: #000;
-	padding-left: 10px;
 	font-weight: normal;
 	line-height: 1.4em;
+	font-family: georgia;
 }
